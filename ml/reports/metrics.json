@@ -1,0 +1,240 @@
+{
+  "model_version": "1.0.0",
+  "dataset_size": 300000,
+  "test_size": 60000,
+  "national_mean_prevalence": 0.1548,
+  "medians": {
+    "age": 47.0,
+    "bmi": 25.0,
+    "physical_activity_min_per_week": 125.0,
+    "sleep_hours": 6.8,
+    "systolic_bp": 142.0,
+    "diastolic_bp": 86.0,
+    "resting_heart_rate": 78.0,
+    "spo2": 97.0,
+    "ldl_cholesterol": 124.4,
+    "hba1c": 6.1
+  },
+  "model_a_lifestyle": {
+    "logistic_regression_uncalibrated": {
+      "auc": 0.8963,
+      "brier_score": 0.0813,
+      "log_loss": 0.2677
+    },
+    "logistic_regression_calibrated": {
+      "auc": 0.8963,
+      "brier_score": 0.0813,
+      "log_loss": 0.2677
+    },
+    "gradient_boosting_comparison": {
+      "auc": 0.8946,
+      "brier_score": 0.0819,
+      "log_loss": 0.2697
+    }
+  },
+  "model_b_vitals_ecg": {
+    "logistic_regression_uncalibrated": {
+      "auc": 0.9054,
+      "brier_score": 0.0784,
+      "log_loss": 0.2578
+    },
+    "logistic_regression_calibrated": {
+      "auc": 0.9054,
+      "brier_score": 0.0784,
+      "log_loss": 0.2578
+    },
+    "gradient_boosting_comparison": {
+      "auc": 0.9034,
+      "brier_score": 0.0791,
+      "log_loss": 0.2603
+    }
+  },
+  "auc_by_sex": {
+    "male": {
+      "model_a_auc": 0.8912,
+      "model_b_auc": 0.9011,
+      "samples": 30553
+    },
+    "female": {
+      "model_a_auc": 0.8969,
+      "model_b_auc": 0.9056,
+      "samples": 29447
+    }
+  },
+  "auc_by_state": {
+    "Andhra Pradesh": {
+      "model_a_auc": 0.894,
+      "model_b_auc": 0.9039,
+      "samples": 2642
+    },
+    "Assam": {
+      "model_a_auc": 0.9239,
+      "model_b_auc": 0.9272,
+      "samples": 1543
+    },
+    "Bihar": {
+      "model_a_auc": 0.9044,
+      "model_b_auc": 0.9103,
+      "samples": 5095
+    },
+    "Chhattisgarh": {
+      "model_a_auc": 0.8944,
+      "model_b_auc": 0.9027,
+      "samples": 1233
+    },
+    "Delhi": {
+      "model_a_auc": 0.8755,
+      "model_b_auc": 0.8884,
+      "samples": 1147
+    },
+    "Goa": {
+      "model_a_auc": 0.8997,
+      "model_b_auc": 0.9029,
+      "samples": 290
+    },
+    "Gujarat": {
+      "model_a_auc": 0.8862,
+      "model_b_auc": 0.902,
+      "samples": 2972
+    },
+    "Haryana": {
+      "model_a_auc": 0.8957,
+      "model_b_auc": 0.9075,
+      "samples": 1460
+    },
+    "Himachal Pradesh": {
+      "model_a_auc": 0.8734,
+      "model_b_auc": 0.8832,
+      "samples": 616
+    },
+    "Jammu and Kashmir": {
+      "model_a_auc": 0.9174,
+      "model_b_auc": 0.9254,
+      "samples": 565
+    },
+    "Jharkhand": {
+      "model_a_auc": 0.9012,
+      "model_b_auc": 0.9053,
+      "samples": 1677
+    },
+    "Karnataka": {
+      "model_a_auc": 0.8931,
+      "model_b_auc": 0.9036,
+      "samples": 3250
+    },
+    "Kerala": {
+      "model_a_auc": 0.9036,
+      "model_b_auc": 0.9137,
+      "samples": 1728
+    },
+    "Madhya Pradesh": {
+      "model_a_auc": 0.8916,
+      "model_b_auc": 0.8999,
+      "samples": 3587
+    },
+    "Maharashtra": {
+      "model_a_auc": 0.8935,
+      "model_b_auc": 0.9043,
+      "samples": 5167
+    },
+    "Odisha": {
+      "model_a_auc": 0.8992,
+      "model_b_auc": 0.9014,
+      "samples": 2067
+    },
+    "Punjab": {
+      "model_a_auc": 0.8722,
+      "model_b_auc": 0.8926,
+      "samples": 1441
+    },
+    "Rajasthan": {
+      "model_a_auc": 0.9079,
+      "model_b_auc": 0.9166,
+      "samples": 3566
+    },
+    "Tamil Nadu": {
+      "model_a_auc": 0.8891,
+      "model_b_auc": 0.8967,
+      "samples": 3423
+    },
+    "Telangana": {
+      "model_a_auc": 0.8834,
+      "model_b_auc": 0.8963,
+      "samples": 2078
+    },
+    "Tripura": {
+      "model_a_auc": 0.8825,
+      "model_b_auc": 0.882,
+      "samples": 322
+    },
+    "Uttar Pradesh": {
+      "model_a_auc": 0.8997,
+      "model_b_auc": 0.9095,
+      "samples": 9222
+    },
+    "Uttarakhand": {
+      "model_a_auc": 0.9003,
+      "model_b_auc": 0.9089,
+      "samples": 732
+    },
+    "West Bengal": {
+      "model_a_auc": 0.8932,
+      "model_b_auc": 0.8983,
+      "samples": 4177
+    }
+  },
+  "calibration_curve": {
+    "model_a": {
+      "prob_pred": [
+        0.0288,
+        0.1438,
+        0.2468,
+        0.3477,
+        0.448,
+        0.5488,
+        0.6488,
+        0.7493,
+        0.848,
+        0.9409
+      ],
+      "prob_true": [
+        0.0285,
+        0.1525,
+        0.245,
+        0.3612,
+        0.4414,
+        0.5192,
+        0.6405,
+        0.7412,
+        0.8469,
+        0.948
+      ]
+    },
+    "model_b": {
+      "prob_pred": [
+        0.0254,
+        0.1436,
+        0.2463,
+        0.3481,
+        0.4485,
+        0.5481,
+        0.6487,
+        0.7485,
+        0.8502,
+        0.9405
+      ],
+      "prob_true": [
+        0.0261,
+        0.1364,
+        0.2557,
+        0.3534,
+        0.4571,
+        0.522,
+        0.6377,
+        0.7338,
+        0.8694,
+        0.9494
+      ]
+    }
+  }
+}

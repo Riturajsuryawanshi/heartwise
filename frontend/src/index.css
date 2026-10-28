@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-main: #fbfaf6;
+  --bg-surface: rgba(255, 255, 255, 0.88);
+  --bg-surface-hover: #ffffff;
+  --border-color: rgba(226, 232, 240, 0.85);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --accent-heart: #e11d48;
+  --color-teal: #0d9488;
+  --color-amber: #d97706;
+  --color-crimson: #e11d48;
+}
+
+.dark {
+  --bg-main: #0c121e;
+  --bg-surface: rgba(19, 29, 49, 0.88);
+  --bg-surface-hover: rgba(28, 41, 68, 0.95);
+  --border-color: rgba(51, 65, 85, 0.7);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --accent-heart: #fb7185;
+  --color-teal: #14b8a6;
+  --color-amber: #f59e0b;
+  --color-crimson: #f43f5e;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom ECG heartbeat pulse wave animation */
+@keyframes ecgLine {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-ecg {
+  stroke-dasharray: 1000;
+  animation: ecgLine 4s linear infinite;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: var(--bg-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+}
+
+/* Print styles for Clean PDF/Print Export */
+@media print {
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-page {
+    box-shadow: none !important;
+    border: 1px solid #cbd5e1 !important;
+    page-break-inside: avoid;
+  }
+}
