@@ -20,6 +20,13 @@ def test_health_check(client):
     assert data["status"] == "healthy"
     assert data["service"] == "HeartWise India API"
 
+def test_sysdag_service_disconnected(client, monkeypatch):
+    monkeypatch.delenv("SYSDAG_MODEL_API_URL", raising=False)
+    status = client.get("/model/status")
+    assert status.status_code == 200 and status.json()["available"] is False
+    response = client.post("/model/analyze", json={"kind": "ecg", "content": "sample_index,time_seconds"})
+    assert response.status_code == 503
+
 def test_get_states(client):
     response = client.get("/states")
     assert response.status_code == 200

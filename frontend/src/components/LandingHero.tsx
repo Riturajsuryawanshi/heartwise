@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Sparkles, AlertCircle, ArrowRight, MapPin, Activity } from 'lucide-react';
+import { ShieldCheck, Sparkles, AlertCircle, ArrowRight, MapPin, Activity, Upload } from 'lucide-react';
 import type { Language } from '../i18n';
 import { translations } from '../i18n';
 import { EcgHeartbeat } from './EcgHeartbeat';
@@ -8,9 +8,10 @@ import { EcgHeartbeat } from './EcgHeartbeat';
 interface LandingHeroProps {
   lang: Language;
   onStart: () => void;
+  onUpload: () => void;
 }
 
-export const LandingHero: React.FC<LandingHeroProps> = ({ lang, onStart }) => {
+export const LandingHero: React.FC<LandingHeroProps> = ({ lang, onStart, onUpload }) => {
   const t = translations[lang];
 
   return (
@@ -81,6 +82,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ lang, onStart }) => {
           <span>{t.startBtn}</span>
           <ArrowRight className="w-5 h-5 ml-2 transition-transform duration-200 group-hover:translate-x-1" />
         </button>
+        <button onClick={onUpload} type="button" className="inline-flex items-center justify-center px-8 py-4 rounded-2xl border border-rose-200 dark:border-rose-800 bg-surface text-heart text-base sm:text-lg font-semibold hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors"><Upload className="w-5 h-5 mr-2"/>Upload report or ECG</button>
       </motion.div>
 
       {/* Privacy Guarantee Note */}

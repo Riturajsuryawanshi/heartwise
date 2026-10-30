@@ -180,7 +180,7 @@ export const translations: Record<Language, TranslationDictionary> = {
     disclaimerShort: "Awareness tool, not a medical diagnosis.",
     disclaimerFull: "HeartWise India provides an estimated chance of cardiovascular disease based on population-calibrated statistical models. It does not replace a clinical examination by a physician.",
     disclaimerEmergency: "If you are experiencing severe symptoms right now, do not wait.",
-    startBtn: "Begin Risk Screening",
+    startBtn: "Take assessment",
     privacyBadge: "100% Private: No personal data is stored or logged.",
     backBtn: "Back",
     nextBtn: "Continue",

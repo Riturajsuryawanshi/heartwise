@@ -259,3 +259,9 @@ Returns epidemiological cardiovascular disease baseline risk data for all 24 Ind
 
 ### 4. `GET /health`
 Returns health check status and confirms loaded model pipelines.
+# SYSDAG report integration
+
+The landing page now offers two paths: the existing HeartWise assessment and a report/ECG upload screen. The latter calls HeartWise's own `/api/model/*` routes, which proxy the trained SYSDAG analysis service. Set `SYSDAG_MODEL_API_URL` on the backend to the trusted HTTPS origin of that service (without `/api/analysis`). When unset or unreachable, the screen shows that prediction is unavailable and disables the analyse action. Do not use an ephemeral tunnel for patient data.
+
+Supported SYSDAG predictions depend on the connected service: a calibrated raw 12-lead CSV scores five ECG pattern groups; structured first-24-hour inpatient data produce an inpatient outcome score. Text PDF extraction and ECG image review require a service with those capabilities; image documents cannot be fed directly into the waveform model. Results are research findings for clinical review, not a general disease diagnosis.
+
