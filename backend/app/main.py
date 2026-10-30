@@ -8,7 +8,7 @@ import os
 import json
 import httpx
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, HTTPException, status, Body
+from fastapi import FastAPI, APIRouter, HTTPException, status, Body
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
@@ -22,7 +22,7 @@ from .predictor import RiskPredictor
 
 # Locate models relative to this file
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODELS_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "..", "ml", "models"))
+MODELS_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "models"))
 
 predictor: RiskPredictor = None
 
@@ -40,6 +40,7 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan
 )
+router = APIRouter()
 
 # Enable CORS for frontend applications
 app.add_middleware(
@@ -50,7 +51,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get('/model/status', tags=['SYSDAG'])
+@router.get('/model/status', tags=['SYSDAG'])
 async def sysdag_status():
     endpoint = os.getenv('SYSDAG_MODEL_API_URL', '').rstrip('/')
     if not endpoint:
@@ -64,7 +65,7 @@ async def sysdag_status():
     except (httpx.HTTPError, ValueError):
         return {'available': False, 'message': 'SYSDAG model service is unavailable.'}
 
-@app.post('/model/analyze', tags=['SYSDAG'])
+@router.post('/model/analyze', tags=['SYSDAG'])
 async def sysdag_analyze(payload: dict = Body(...)):
     endpoint = os.getenv('SYSDAG_MODEL_API_URL', '').rstrip('/')
     if not endpoint:
@@ -86,7 +87,7 @@ async def sysdag_analyze(payload: dict = Body(...)):
     except (httpx.HTTPError, ValueError):
         raise HTTPException(status_code=503, detail='SYSDAG model service is unavailable.')
 
-@app.get("/health", tags=["System"])
+@router.get("/health", tags=["System"])
 def health_check():
     """Health status and service availability."""
     return {
@@ -96,14 +97,14 @@ def health_check():
         "models_loaded": predictor is not None
     }
 
-@app.get("/states", tags=["Epidemiological Reference"])
+@router.get("/states", tags=["Epidemiological Reference"])
 def get_states():
     """Returns available Indian states with their estimated population cardiac baseline data."""
     if not predictor:
         raise HTTPException(status_code=503, detail="Models not loaded yet")
     return predictor.get_states()
 
-@app.post(
+@router.post(
     "/predict/lifestyle",
     response_model=PredictionResponse,
     status_code=status.HTTP_200_OK,
@@ -122,7 +123,7 @@ def predict_lifestyle(payload: LifestyleInput):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Inference error: {str(e)}")
 
-@app.post(
+@router.post(
     "/predict/vitals",
     response_model=PredictionResponse,
     status_code=status.HTTP_200_OK,
@@ -140,3 +141,6 @@ def predict_vitals(payload: VitalsInput):
         return response
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Inference error: {str(e)}")
+
+app.include_router(router, prefix="/api")
+app.include_router(router, include_in_schema=False)
