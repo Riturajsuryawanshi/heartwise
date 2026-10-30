@@ -1,0 +1,125 @@
+{
+  "national_average_risk": 0.1548,
+  "state_risks": {
+    "Andhra Pradesh": {
+      "count": 13172,
+      "mean_risk": 0.1582,
+      "relative_to_national": 0.3
+    },
+    "Assam": {
+      "count": 7584,
+      "mean_risk": 0.142,
+      "relative_to_national": -1.3
+    },
+    "Bihar": {
+      "count": 25190,
+      "mean_risk": 0.132,
+      "relative_to_national": -2.3
+    },
+    "Chhattisgarh": {
+      "count": 6055,
+      "mean_risk": 0.1435,
+      "relative_to_national": -1.1
+    },
+    "Delhi": {
+      "count": 5974,
+      "mean_risk": 0.2066,
+      "relative_to_national": 5.2
+    },
+    "Goa": {
+      "count": 1412,
+      "mean_risk": 0.2054,
+      "relative_to_national": 5.1
+    },
+    "Gujarat": {
+      "count": 15005,
+      "mean_risk": 0.1731,
+      "relative_to_national": 1.8
+    },
+    "Haryana": {
+      "count": 7298,
+      "mean_risk": 0.1672,
+      "relative_to_national": 1.2
+    },
+    "Himachal Pradesh": {
+      "count": 2940,
+      "mean_risk": 0.1517,
+      "relative_to_national": -0.3
+    },
+    "Jammu and Kashmir": {
+      "count": 2958,
+      "mean_risk": 0.1518,
+      "relative_to_national": -0.3
+    },
+    "Jharkhand": {
+      "count": 8317,
+      "mean_risk": 0.1266,
+      "relative_to_national": -2.8
+    },
+    "Karnataka": {
+      "count": 16444,
+      "mean_risk": 0.1722,
+      "relative_to_national": 1.7
+    },
+    "Kerala": {
+      "count": 8758,
+      "mean_risk": 0.1806,
+      "relative_to_national": 2.6
+    },
+    "Madhya Pradesh": {
+      "count": 17808,
+      "mean_risk": 0.1411,
+      "relative_to_national": -1.4
+    },
+    "Maharashtra": {
+      "count": 26187,
+      "mean_risk": 0.1732,
+      "relative_to_national": 1.8
+    },
+    "Odisha": {
+      "count": 10499,
+      "mean_risk": 0.1453,
+      "relative_to_national": -1.0
+    },
+    "Punjab": {
+      "count": 7333,
+      "mean_risk": 0.1765,
+      "relative_to_national": 2.2
+    },
+    "Rajasthan": {
+      "count": 17602,
+      "mean_risk": 0.1404,
+      "relative_to_national": -1.4
+    },
+    "Tamil Nadu": {
+      "count": 17261,
+      "mean_risk": 0.1799,
+      "relative_to_national": 2.5
+    },
+    "Telangana": {
+      "count": 10354,
+      "mean_risk": 0.1626,
+      "relative_to_national": 0.8
+    },
+    "Tripura": {
+      "count": 1478,
+      "mean_risk": 0.1279,
+      "relative_to_national": -2.7
+    },
+    "Uttar Pradesh": {
+      "count": 46325,
+      "mean_risk": 0.1383,
+      "relative_to_national": -1.7
+    },
+    "Uttarakhand": {
+      "count": 3571,
+      "mean_risk": 0.1439,
+      "relative_to_national": -1.1
+    },
+    "West Bengal": {
+      "count": 20475,
+      "mean_risk": 0.1542,
+      "relative_to_national": -0.1
+    }
+  }
+}
