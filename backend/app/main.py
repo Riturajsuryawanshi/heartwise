@@ -5,8 +5,10 @@ and safety disclaimers for adult cardiac risk screening in India.
 """
 
 import os
+import json
+import httpx
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI, HTTPException, status, Body
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
@@ -47,6 +49,42 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get('/model/status', tags=['SYSDAG'])
+async def sysdag_status():
+    endpoint = os.getenv('SYSDAG_MODEL_API_URL', '').rstrip('/')
+    if not endpoint:
+        return {'available': False, 'message': 'SYSDAG model service is not configured.'}
+    try:
+        async with httpx.AsyncClient(timeout=8.0) as client:
+            response = await client.get(f'{endpoint}/api/analysis/status')
+            response.raise_for_status()
+            data = response.json()
+        return {'available': data.get('available') is True, 'formats': data.get('formats', [])}
+    except (httpx.HTTPError, ValueError):
+        return {'available': False, 'message': 'SYSDAG model service is unavailable.'}
+
+@app.post('/model/analyze', tags=['SYSDAG'])
+async def sysdag_analyze(payload: dict = Body(...)):
+    endpoint = os.getenv('SYSDAG_MODEL_API_URL', '').rstrip('/')
+    if not endpoint:
+        raise HTTPException(status_code=503, detail='SYSDAG model service is not configured.')
+    kind, content = payload.get('kind'), payload.get('content')
+    if kind not in ('ecg', 'ehr', 'pdf', 'ecg-image') or not isinstance(content, str) or len(content.encode('utf-8')) > 4_100_000:
+        raise HTTPException(status_code=400, detail='Choose a supported report under 3 MB.')
+    try:
+        async with httpx.AsyncClient(timeout=65.0) as client:
+            response = await client.post(f'{endpoint}/api/analysis', json={'kind': kind, 'content': content})
+            data = response.json()
+            if kind == 'pdf' and response.is_success and data.get('success') and isinstance(data.get('result', {}).get('values'), dict):
+                extraction = data['result']
+                response = await client.post(f'{endpoint}/api/analysis', json={'kind': 'ehr', 'content': json.dumps(extraction['values'])})
+                data = response.json()
+                if response.is_success and data.get('success'):
+                    data['result']['extraction'] = {'coverage': extraction.get('coverage'), 'missing_fields': extraction.get('missing_fields')}
+        return JSONResponse(status_code=response.status_code, content=data, headers={'Cache-Control': 'no-store'})
+    except (httpx.HTTPError, ValueError):
+        raise HTTPException(status_code=503, detail='SYSDAG model service is unavailable.')
 
 @app.get("/health", tags=["System"])
 def health_check():

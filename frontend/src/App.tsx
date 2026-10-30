@@ -5,6 +5,7 @@ import { Questionnaire } from './components/Questionnaire';
 import { EmergencyCard } from './components/EmergencyCard';
 import { ResultScreen } from './components/ResultScreen';
 import { VitalsModal } from './components/VitalsModal';
+import { ReportUpload } from './components/ReportUpload';
 import type { Language } from './i18n';
 import type {
   LifestylePayload,
@@ -18,7 +19,7 @@ import confetti from 'canvas-confetti';
 export function App() {
   const [lang, setLang] = useState<Language>('en');
   const [isDark, setIsDark] = useState<boolean>(false);
-  const [view, setView] = useState<'landing' | 'questionnaire' | 'emergency' | 'result'>('landing');
+  const [view, setView] = useState<'landing' | 'questionnaire' | 'emergency' | 'result' | 'upload'>('landing');
 
   // Payload & Prediction states
   const [lastLifestylePayload, setLastLifestylePayload] = useState<LifestylePayload | null>(null);
@@ -161,8 +162,10 @@ export function App() {
 
         {/* View Routing */}
         {view === 'landing' && (
-          <LandingHero lang={lang} onStart={() => setView('questionnaire')} />
+          <LandingHero lang={lang} onStart={() => setView('questionnaire')} onUpload={() => setView('upload')} />
         )}
+
+        {view === 'upload' && <ReportUpload onBack={() => setView('landing')} />}
 
         {view === 'questionnaire' && (
           <Questionnaire
