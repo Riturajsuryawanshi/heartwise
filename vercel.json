@@ -3,8 +3,7 @@
   "services": {
     "backend": {
       "root": "backend",
-      "framework": "fastapi",
-      "entrypoint": "app.main:app"
+      "framework": "fastapi"
     },
     "frontend": {
       "root": "frontend",
